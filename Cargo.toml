@@ -1,0 +1,20 @@
+[package]
+name = "n64tools"
+version = "0.1.0"
+authors = ["monocasa"]
+
+[[bin]]
+name = "buildrom64"
+path = "bin/buildrom64.rs"
+
+[[bin]]
+name = "chksum64"
+path = "bin/chksum64.rs"
+
+[[bin]]
+name = "swaprom64"
+path = "bin/swaprom64.rs"
+
+[dependencies]
+byteorder = "0.5.3"
+
