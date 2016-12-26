@@ -1,5 +1,5 @@
 [package]
-name = "n64tools"
+name = "n64toolchain"
 version = "0.1.0"
 authors = ["monocasa"]
 

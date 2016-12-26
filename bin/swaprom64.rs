@@ -1,4 +1,4 @@
-extern crate n64tools;
+extern crate n64toolchain;
 
 use std::io::Read;
 use std::io::Write;
@@ -41,7 +41,7 @@ fn main() {
 		}
 	}
 
-	match n64tools::cart::swap_cart_to(n64tools::cart::ByteSwapping::Native, buffer.as_mut_slice()) {
+	match n64toolchain::cart::swap_cart_to(n64toolchain::cart::ByteSwapping::Native, buffer.as_mut_slice()) {
 		Ok(_) => {},
 		Err(err) => {
 			println!("Error:  Unable to swap binary:  {}", err);

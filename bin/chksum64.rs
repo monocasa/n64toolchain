@@ -1,4 +1,4 @@
-extern crate n64tools;
+extern crate n64toolchain;
 
 use std::io::Read;
 use std::io::Write;
@@ -43,7 +43,7 @@ fn main() {
 		}
 	}
 
-	let original_byte_swapping = match n64tools::cart::detect_swapping(buffer.as_slice()) {
+	let original_byte_swapping = match n64toolchain::cart::detect_swapping(buffer.as_slice()) {
 		Some(byte_swapping) => byte_swapping,
 		None => {
 			println!("Error:  Unable to detect byte ordering dynamically from file");
@@ -51,7 +51,7 @@ fn main() {
 		}
 	};
 
-	match n64tools::cart::swap_cart_to(n64tools::cart::ByteSwapping::Native, buffer.as_mut_slice()) {
+	match n64toolchain::cart::swap_cart_to(n64toolchain::cart::ByteSwapping::Native, buffer.as_mut_slice()) {
 		Ok(_) => {},
 		Err(err) => {
 			println!("Error:  Unable to swap binary to native:  {}", err);
@@ -59,7 +59,7 @@ fn main() {
 		}
 	}
 
-	let (checksum1, checksum2) = match n64tools::cart::calculate_cart_checksum(buffer.as_slice()) {
+	let (checksum1, checksum2) = match n64toolchain::cart::calculate_cart_checksum(buffer.as_slice()) {
 		Ok(checksum) => checksum,
 		Err(err) => {
 			println!("Error:  Unable to calculate checksum on file{}:  {:?}", input_filename, err);
@@ -88,7 +88,7 @@ fn main() {
 				buffer[0x14], buffer[0x15], buffer[0x16], buffer[0x17]);
 	}
 
-	match n64tools::cart::swap_cart_to(original_byte_swapping.clone(), buffer.as_mut_slice()) {
+	match n64toolchain::cart::swap_cart_to(original_byte_swapping.clone(), buffer.as_mut_slice()) {
 		Ok(_) => {},
 		Err(err) => {
 			println!("Error:  Unable to swap binary to original({}):  {}", original_byte_swapping, err);

@@ -1,5 +1,5 @@
 extern crate byteorder;
-extern crate n64tools;
+extern crate n64toolchain;
 
 use std::fs;
 use std::io;
@@ -133,7 +133,7 @@ fn main() {
 	bootcode_file.read(&mut rom[BOOTCODE_START..BOOTCODE_END]).unwrap();
 	load_file.read(&mut rom[LOAD_START..load_file_len as usize]).unwrap();
 
-	let (crc1, crc2) = n64tools::cart::calculate_cart_checksum(&rom).unwrap();
+	let (crc1, crc2) = n64toolchain::cart::calculate_cart_checksum(&rom).unwrap();
 
 	let mut rom_header = RomHeader::new();
 	rom_header.load_addr = base_addr;
